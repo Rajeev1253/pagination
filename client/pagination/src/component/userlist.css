@@ -1,0 +1,15 @@
+.table-box{
+   display: flex;
+   justify-content: center;
+}
+table{
+    border:1px solid black
+
+}
+.pagination{
+    text-align: center;
+    padding-top: 10px;
+}
+input{
+    width: 50px;
+}
