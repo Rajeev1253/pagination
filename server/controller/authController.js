@@ -1,20 +1,11 @@
 import { userModel } from "../model/userModel.js";
 export const createUser = async (req, res) => {
   try {
-    const {
-      firstName,
-      lastName,
-      email,
-      contact,
-      age,
-      dob,
-      salary,
-      adress,
-      imageurl,
-    } = req.body;
+    const { first, last, email, contact, age, dob, salary, adress, imageurl } =
+      req.body;
     const user = new userModel({
-      firstName,
-      lastName,
+      first,
+      last,
       email,
       contact,
       age,
@@ -40,10 +31,15 @@ export const createUser = async (req, res) => {
 export const getuser = async (req, res) => {
   try {
     // Adding Pagination
-    const limitValue = req.query.limit || 2;
-    const skipValue = req.query.page || 0;
-    const posts = await userModel.find().limit(limitValue).skip(skipValue*limitValue);
-    console.log(posts)
+    const page = req.query.page;
+    const limitValue = req.query.limit * 1 || 10;
+    const skipValue = (page - 1) * limitValue || 0;
+
+    const posts = await userModel
+      .find()
+      .limit(limitValue)
+      .skip(skipValue * limitValue);
+    console.log(page + limitValue + skipValue);
     res.status(200).send(posts);
   } catch (error) {
     console.log(error);
@@ -66,7 +62,7 @@ export const deleteuser = async (req, res) => {
   try {
     const { id } = req.params;
     console.log(id);
-    await userModel.findByIdAndDelete(id)
+    await userModel.findByIdAndDelete(id);
     res.status(201).send({
       success: true,
       message: `user deleted sucessfully`,

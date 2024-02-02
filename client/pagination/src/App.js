@@ -1,13 +1,12 @@
-import './App.css';
-import UserList from './component/UserList2';
-
+import Createuser from "./page/Createuser.js";
+import "./App.css";
+import UserList from "./component/UserList2";
 
 function App() {
   return (
-    <div className="App"> 
-    <UserList/>
-    
-   </div>
+    <div className="App">
+      <UserList />
+    </div>
   );
 }
 
