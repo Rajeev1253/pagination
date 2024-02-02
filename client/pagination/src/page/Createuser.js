@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./createuser.css";
+import { Link } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast'
 
 const Createuser = () => {
   const [first, setfirst] = useState();
@@ -11,7 +13,6 @@ const Createuser = () => {
   const [dob, setdob] = useState();
   const [salary, setsalary] = useState();
   const [adress, setadress] = useState();
-  const [imageurl, seturl] = useState();
 
   const handlefirst = (e) => {
     const value = e.target.value;
@@ -45,10 +46,7 @@ const Createuser = () => {
     const value = e.target.value;
     setadress(value);
   };
-  const handleimage = (e) => {
-    const value = e.target.value;
-    seturl(value);
-  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -62,12 +60,13 @@ const Createuser = () => {
       dob,
       salary,
       adress,
-      imageurl,
     };
     try {
       const response = await axios.post("http://localhost:4000/users", newUser);
-      console.log("user created sucessfully");
+      toast("user Created")
+      
       console.log(response);
+    
     } catch (error) {
       console.log("err", error.response.data);
     }
@@ -75,8 +74,10 @@ const Createuser = () => {
 
   return (
     <div>
+    <Toaster/>
       <div className="user-box">
-        <div className="heading">
+      <div className="box">
+      <div className="heading">
           <h1>Create user</h1>
         </div>
         <div className="inputBox">
@@ -112,13 +113,17 @@ const Createuser = () => {
             placeholder="adress"
             onChange={handleadress}
           ></input>
-          <input
-            className="image url"
-            placeholder="imageurl"
-            onChange={handleimage}
-          ></input>
+         
         </div>
-        <button onClick={handleSubmit}>Submit</button>
+        <div className="buttons">
+          <button onClick={handleSubmit}>Submit</button>
+          <Link to="/">
+            <button>UserList</button>{" "}
+          </Link>
+        </div>
+        
+      </div>
+      
       </div>
     </div>
   );

@@ -2,28 +2,53 @@
     padding:0;
     margin: 0;
 }
+.logo1{
+    font-size: 30px;
+    font-weight:800;
+   
+}
+.table-header{
+    text-align: center;
+}
+
+
 .table-box{
-   display: flex;
-   justify-content: center;
-   width: 100%;
+   display: flex !important;
+   justify-content: center !important;
+   width: 100% !important;
+   padding-left: 30px;
+   padding-right: 30px;
 }
 table{
     width: 100%;
 }
 td{
-    text-align: center;
+    text-align: center !important;
     padding: 10px;
 }
 th{
     background-color: antiquewhite;
+    font-size:20px;
+    text-align: center;
 }
 table{
     border:1px solid black
 }
+.bottom{
+    display: flex;
+    justify-content: space-around;
+    padding-top:10px;
 
+}
 .pagination{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+.pagination>span{
+    width: 30px;
     text-align: center;
-    padding-top: 10px;
 }
 input{
     width: 50px;
@@ -38,4 +63,7 @@ input{
     width: 300px;
     border-radius: 2px;
     
+}
+button{
+    padding: 8px;
 }
