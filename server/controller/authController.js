@@ -31,14 +31,14 @@ export const createUser = async (req, res) => {
 export const getuser = async (req, res) => {
   try {
     // Adding Pagination
-    const page = req.query.page;
-    const limitValue = req.query.limit * 1 || 10;
+    const page = req.query.page || 1;
+    const limitValue = req.query.limit * 1 || 3;
     const skipValue = (page - 1) * limitValue || 0;
 
     const posts = await userModel
       .find()
       .limit(limitValue)
-      .skip(skipValue * limitValue);
+      .skip(skipValue);
     console.log(page + limitValue + skipValue);
     res.status(200).send(posts);
   } catch (error) {
@@ -47,10 +47,12 @@ export const getuser = async (req, res) => {
 };
 export const updateuser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = req.body;
+    const {id} = req.params
     // userModel.update({ id, }, { $set: {  } });
-    const updated_user = userModel.findByIdAndUpdate(id, user);
+    const user = req.body
+    console.log(req.params)
+    console.log(req.body)
+    const updated_user = await userModel.findByIdAndUpdate({_id:id}, user);
     res.status(200).send("updated");
   } catch (error) {
     console.log(error);

@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
-  imagurl: {
-    type: String,
-  },
+
   first: {
     type: String,
   },

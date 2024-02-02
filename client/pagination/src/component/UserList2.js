@@ -3,16 +3,14 @@ import "../component/userlist.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import EditUser from "./EditUser";
-
+import toast, { Toaster } from 'react-hot-toast'
 
 const UserList = () => {
-  const [modalOpen, setModalOpen] = useState(false);
   const [data, setdata] = useState();
   const [page, setPage] = useState(1);
   const [limit, setlimit] = useState(3);
 
   const fetchdata = async () => {
-    console.log("hello");
     const response = await axios.get("http://localhost:4000/users");
     setdata(response.data);
     console.log(response.data);
@@ -30,7 +28,7 @@ const UserList = () => {
     }
   };
   const handleNext = async () => {
-    if (data != "") {
+    if (data !== "") {
       const response = await axios.get(
         `http://localhost:4000/users?page=${page+1}&limit=${limit}`
       );
@@ -39,8 +37,9 @@ const UserList = () => {
     }
   };
   const handleDelete = async (id) => {
-    const itemdel = await axios.delete(`http://localhost:4000/users/${id}`);
+     await axios.delete(`http://localhost:4000/users/${id}`);
     fetchdata();
+    toast.success("data deleted ")
   };
   const handleSubmit = async () => {
     const response = await axios.get(
@@ -63,6 +62,7 @@ const UserList = () => {
 
   return (
     <div className="table-main">
+    <Toaster/>
       <div className="table-header">
         <div className="logo1">User  List</div>
         <div className="status">

@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import toast, { Toaster } from 'react-hot-toast'
 function EditUser({ userData }) {
 
   const [show, setShow] = useState(false);
@@ -21,6 +23,7 @@ function EditUser({ userData }) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const handleUpdate = async () => {
+    try{
     axios.patch(`http://localhost:4000/users/${userData._id}`, {
       first: first,
       last: last,
@@ -31,15 +34,23 @@ function EditUser({ userData }) {
       salary: salary,
       adress: adress,
     });
+    toast.success("user updated")
+
+  }
+  catch(error){
+    toast.error("Error in updation")
+
+  }
   };
 
   return (
     <>
+    <Toaster/>
       <Button onClick={handleShow}>Edit</Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Edit User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
